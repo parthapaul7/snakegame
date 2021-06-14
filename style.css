@@ -1,0 +1,25 @@
+.container{
+    width:  600px;
+    height: 600px;
+    padding: 0px;
+
+
+    display: grid;
+    grid-template-columns: repeat(20,1fr);
+    grid-template-rows: repeat(20,1fr);
+
+    border: solid black 4px;
+    background-color: blanchedalmond;
+}
+
+#body{
+    background-color: grey;
+}
+
+#food{
+    background-color: orange;
+}
+
+#head{
+    background-color: green;
+}
