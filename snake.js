@@ -76,7 +76,8 @@ function engine() {
   console.log(snake);
 }
 
-// moving the snake
+// arrow button events
+
 window.addEventListener("keydown", (e) => {
   switch (e.key) {
     case "ArrowUp":
