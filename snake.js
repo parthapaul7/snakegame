@@ -74,7 +74,7 @@ window.addEventListener("keydown", (e) => {
 
 function snakeMove() {
   snake.forEach((e, index) => {
-    // i know this part is really bad but at 2 am i cnat think something else
+   
     if (e.x >= 20) e.x = e.x - 20;
     if (e.y >= 20) e.y = e.y - 20;
     if (e.x <= 0) e.x += 20;
