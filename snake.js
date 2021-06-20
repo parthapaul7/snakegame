@@ -6,7 +6,9 @@ let food = document.getElementById("food");
 let board = document.querySelector(".container");
 const score= document.getElementById('score');
 const hiscore= document.getElementById('hiscore');
-
+const eat = new Audio('audio/clap 1.wav');
+const over= new Audio('audio/perecussion 8.wav');
+const dir= new Audio('audio/kick 1.wav');
 
 let snakeDir = { x: 0, y: 0 };
 let snake = [
@@ -16,8 +18,8 @@ let snake = [
   { x: 10, y: 7 },
 ];
 
+let lastTime=0;
 let speed = 5;
-let lastTime = 0;
 let foodLoaction = { x: 5, y: 15 };
 let pause = true;
 
@@ -133,7 +135,7 @@ function foodUpdate() {
       };
     }, 50);
 
-    console.log("food loacation change");
+    eat.play();
   }
   food.style.gridRowStart = foodLoaction.y;
   food.style.gridColumnStart = foodLoaction.x;
@@ -147,16 +149,19 @@ function gameover() {
     if (snake[i].x == snake[0].x && snake[i].y == snake[0].y) {
       snakeDir = { x: 0, y: 0 };
       pause = true;
+
+      over.play();
+      window.location.reload();
+      window.alert('game over dude');
       
-      window.location.reload();// 
-      window.alert('game over dude')
     }
   }
+  
 }
 
 function printScore(){
   score.innerHTML=`<b> Score: ${point}</b>`;
-  hiscore.innerHTML=`<b> High Score: ${highestPoint}</b>`
+  hiscore.innerHTML=`<b> High Score: ${highestPoint}</b>`;
 
   highestPoint=localStorage.getItem('hp');
 
