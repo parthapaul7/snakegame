@@ -14,14 +14,27 @@
 
 #body{
     background-color: grey;
+    border: 1px black dashed;
+    border-radius: 20%;
+    margin: 1px;
 }
 
 #food{
     background-color: orange;
+    border-radius: 50%;
+
+    width: 70%;
+    height: 70%;
+
+    margin: auto ;
 }
 
 #head{
     background-color: green;
+    border-radius: 30%;
+    /* background-image: url(images/head.png); */
+    background-size: 110%;
+
 }
 
 #score{
@@ -34,4 +47,11 @@
     position: absolute;
     top:80px;
     right: 100px;
+}
+
+#sfood{
+
+    background-color: magenta;
+    border-radius: 50%;
+    
 }

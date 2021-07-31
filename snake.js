@@ -3,6 +3,7 @@
 let body = document.getElementById("body");
 let head = document.getElementById("head");
 let food = document.getElementById("food");
+let sfood= document.getElementById('sfood');
 let board = document.querySelector(".container");
 const score= document.getElementById('score');
 const hiscore= document.getElementById('hiscore');
@@ -14,18 +15,19 @@ let snakeDir = { x: 0, y: 0 };
 let snake = [
   { x: 10, y: 10 },
   { x: 10, y: 9 },
-  { x: 10, y: 8 },
-  { x: 10, y: 7 },
+  { x: 10, y: 8 }
 ];
 
 let lastTime=0;
 let speed = 5;
-let foodLoaction = { x: 5, y: 15 };
+let foodLoaction = { x: 5, y: 15 }; 
+let sfoodLocation= { x: 5, y: 15 };
 let pause = true;
+
 
 let point=0;
 let highestPoint=0;
-
+let supfood=0;
 
 window.requestAnimationFrame(main);
 
@@ -48,6 +50,8 @@ function main(cTime) {
   gameover();
 
   printScore();
+
+  // superfood(); super food is still not ready
 
   // dont forget to call the function
 }
@@ -127,6 +131,7 @@ function foodUpdate() {
     snake.unshift({ x: foodLoaction.x, y: foodLoaction.y });
 
     point++;
+    supfood++;
     // set timeout to change the after a litte delay to make it real
     setTimeout(() => {
       foodLoaction = {
@@ -174,3 +179,30 @@ function printScore(){
   }
 
 }
+
+function superfood(){
+
+ setInterval(() => {
+    
+  
+  sfood.style.gridRowStart = sfoodLocation.y;
+  sfood.style.gridColumnStart = sfoodLocation.x;
+
+   board.appendChild(sfood);
+
+   if (sfoodLocation.x == snake[0].x && sfoodLocation.y == snake[0].y)
+  {
+      snake.unshift({ x: sfoodLocation.x, y: sfoodLocation.y });
+    
+    sfoodLocation = {
+      x: Math.round(Math.random() * 20),
+      y: Math.round(Math.random() * 20),
+    };
+
+  
+ 
+  }
+ }, 5000);
+ 
+}
+
