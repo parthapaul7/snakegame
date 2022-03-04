@@ -49,6 +49,14 @@
     right: 100px;
 }
 
+
+
+.speed{
+    position: absolute;
+    display: flex ;
+    top: 120px;
+    right: 110px;;
+}
 #sfood{
 
     background-color: magenta;

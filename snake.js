@@ -1,5 +1,5 @@
 //game variables
-
+console.time("full script")
 let body = document.getElementById("body");
 let head = document.getElementById("head");
 let food = document.getElementById("food");
@@ -7,9 +7,12 @@ let sfood= document.getElementById('sfood');
 let board = document.querySelector(".container");
 const score= document.getElementById('score');
 const hiscore= document.getElementById('hiscore');
-const eat = new Audio('audio/clap 1.wav');
-const over= new Audio('audio/perecussion 8.wav');
-const dir= new Audio('audio/kick 1.wav');
+const eat = new Audio('audio/clap.wav');
+const over= new Audio('audio/precursor.wav');
+const dir= new Audio('audio/kick.wav');
+const increaseSpeed = document.getElementById("increaseSpeed")
+const decreaseSpeed = document.getElementById('decreaseSpeed')
+const showSpeed = document.getElementById("showSpeed")
 
 let snakeDir = { x: 0, y: 0 };
 let snake = [
@@ -19,7 +22,7 @@ let snake = [
 ];
 
 let lastTime=0;
-let speed = 5;
+let speed = localStorage.getItem("speed")|| 5;
 let foodLoaction = { x: 5, y: 15 }; 
 let sfoodLocation= { x: 5, y: 15 };
 let pause = true;
@@ -29,6 +32,19 @@ let point=0;
 let highestPoint=0;
 let supfood=0;
 
+    showSpeed.innerHTML= `<b>speed : ${speed}</b>`
+  increaseSpeed.addEventListener("click",()=>{
+    speed++;
+    showSpeed.innerHTML= `<b>speed : ${speed}</b>`
+    localStorage.setItem("speed",speed)
+  })
+
+  decreaseSpeed.addEventListener("click",()=>{
+    speed= speed-1
+    showSpeed.innerHTML= `<b>speed : ${speed}</b>`
+    localStorage.setItem("speed",speed)
+  })
+  
 window.requestAnimationFrame(main);
 
 // functions
@@ -36,6 +52,7 @@ window.requestAnimationFrame(main);
 
 function main(cTime) {
   window.requestAnimationFrame(main);
+  // just to control the speed 
   if ((cTime - lastTime) / 1000 < 1 / speed) {
     return 0;
   }
@@ -57,11 +74,13 @@ function main(cTime) {
 }
 
 window.addEventListener("keydown", (e) => {
+
   switch (e.key) {
     case "ArrowUp":
       if(snakeDir.y!=1){
       snakeDir = { x: 0, y: -1 };
       pause = false;
+      dir.play()
       }
       break;
     case "ArrowDown":
@@ -69,18 +88,22 @@ window.addEventListener("keydown", (e) => {
      
       snakeDir = { x: 0, y: 1 };
       pause = false;
+      dir.play()
       }
       break;
     case "ArrowLeft":
       if(snakeDir.x!=1){
       snakeDir = { x: -1, y: 0 };
       pause = false;
+      dir.play()
       }
       break;
     case "ArrowRight":
+      dir.play()
       if(snakeDir.x!=-1){
       snakeDir = { x: 1, y: 0 };
       pause = false;
+      dir.play()
       }
       break;
     case "Enter":
@@ -91,11 +114,13 @@ window.addEventListener("keydown", (e) => {
     default:
       break;
   }
+  
 });
 
 // moving the snake
 
 function snakeMove() {
+
   snake.forEach((e, index) => {
     if (e.x >= 20) e.x = e.x - 20;
     if (e.y >= 20) e.y = e.y - 20;
@@ -106,7 +131,6 @@ function snakeMove() {
       if (!pause) {
         snake[snake.length - index - 1].x = snake[snake.length - index - 2].x;
         snake[snake.length - index - 1].y = snake[snake.length - index - 2].y;
-        console.log(snake.length - index - 1);
       }
         body.style.gridRowStart =snake[snake.length - index - 1].y;
         body.style.gridColumnStart =snake[snake.length - index - 1].x;
@@ -123,13 +147,16 @@ function snakeMove() {
   head.style.gridRowStart = snake[0].y;
   head.style.gridColumnStart = snake[0].x;
   board.appendChild(head);
+
+
 }
 // gameover function
 
 function foodUpdate() {
+ 
   if (foodLoaction.x == snake[0].x && foodLoaction.y == snake[0].y) {
     snake.unshift({ x: foodLoaction.x, y: foodLoaction.y });
-
+    console.log(foodLoaction,snake)
     point++;
     supfood++;
     // set timeout to change the after a litte delay to make it real
@@ -146,6 +173,7 @@ function foodUpdate() {
   food.style.gridColumnStart = foodLoaction.x;
 
   board.appendChild(food);
+
 }
 
 function gameover() {
@@ -206,3 +234,4 @@ function superfood(){
  
 }
 
+console.timeEnd("full script")
