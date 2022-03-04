@@ -32,16 +32,16 @@ let point=0;
 let highestPoint=0;
 let supfood=0;
 
-    showSpeed.innerHTML= `<b>speed : ${speed}</b>`
+    showSpeed.innerHTML= ` <b>speed : ${speed}</b> `
   increaseSpeed.addEventListener("click",()=>{
     speed++;
-    showSpeed.innerHTML= `<b>speed : ${speed}</b>`
+    showSpeed.innerHTML= ` <b>speed : ${speed}</b> `
     localStorage.setItem("speed",speed)
   })
 
   decreaseSpeed.addEventListener("click",()=>{
     speed= speed-1
-    showSpeed.innerHTML= `<b>speed : ${speed}</b>`
+    showSpeed.innerHTML= ` <b>speed : ${speed}</b> `
     localStorage.setItem("speed",speed)
   })
   
